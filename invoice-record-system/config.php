@@ -21,14 +21,15 @@ if (file_exists(__DIR__ . DIRECTORY_SEPARATOR . 'config.local.php')) {
 $_dbUrlRaw = getenv('MYSQL_URL') ?: getenv('DATABASE_URL') ?: '';
 $_dbUrlParts = (!empty($_dbUrlRaw) && strpos($_dbUrlRaw, 'mysql') === 0) ? parse_url($_dbUrlRaw) : [];
 
-// Set DB_DRIVER to 'mysql' (default for XAMPP & MySQL hosts) or 'sqlite' (portable file-based DB).
-// If MySQL is unavailable, it gracefully falls back to SQLite.
+// Set DB_DRIVER to 'sqlite' (default — portable file-based DB shipped at data/invoices.db,
+// pre-seeded with all clients, invoices and admin users) or 'mysql' (XAMPP / MySQL hosts).
+// If MySQL is chosen but unavailable, it gracefully falls back to SQLite.
 if (!defined('DB_DRIVER')) {
     $_envDriver = getenv('DB_DRIVER');
     if ($_envDriver !== false && $_envDriver !== '') {
         define('DB_DRIVER', strtolower(trim($_envDriver)));
     } else {
-        define('DB_DRIVER', 'mysql');
+        define('DB_DRIVER', 'sqlite');
     }
 }
 

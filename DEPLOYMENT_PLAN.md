@@ -44,9 +44,9 @@ After `npm run build`, `dist/` contains both the static site and the PHP app:
    Or upload `dist.zip` and unzip it directly into `public_html`.
 
 3. **Server configuration (first deploy only)**
-   - Copy `config.local.example.php` to `config.local.php` on the server and fill in the Hostinger MySQL credentials (`DB_HOST`/`DB_NAME`/`DB_USER`/`DB_PASS`). `config.php` loads it automatically and never touches git.
-   - Import `invoice-record-system/database.sql` into the Hostinger MySQL database once (phpMyAdmin or `mysql` CLI).
-   - Ensure `data/sessions/` is writable by PHP (default 0775 usually suffices on Hostinger).
+   - **No database setup needed** — the app runs on SQLite by default, using the pre-seeded `invoice-record-system/data/invoices.db` shipped in `dist/` (contains all clients, invoices, and the admin users).
+   - Ensure the PHP process can **write** to `data/invoices.db`, `data/sessions/`, and `uploads/receipts/` on the server (Hostinger: default 0755/0775 usually suffices; bump to 0775 if login fails silently).
+   - **Optional MySQL instead:** create `config.local.php` from `config.local.example.php` with `DB_DRIVER = 'mysql'` and the Hostinger MySQL credentials. If MySQL is unreachable the app still auto-falls back to SQLite. `config.local.php` is gitignored so credentials never reach git.
 
 4. **Verify**
    - `https://yaramay.online` — static site loads (relative `./` base avoids path issues)
@@ -56,6 +56,6 @@ After `npm run build`, `dist/` contains both the static site and the PHP app:
 
 ## Notes
 
-- Uploading `dist/*` **adds/overwrites** files on the server but never deletes existing ones — server-side uploads and receipts persist across deploys.
-- On the server, the PHP app uses **MySQL** via `config.local.php`. If MySQL is ever unavailable, `config.php` automatically falls back to the tracked `data/invoices.db` SQLite file.
+- Uploading `dist/*` **adds/overwrites** files on the server but never deletes existing ones — server-side uploads and receipts persist across deploys. Note: overwriting `data/invoices.db` would reset any new records written on the server, so after the first deploy, exclude that file from uploads (or back it up before each deploy).
+- **Default database is SQLite** (`data/invoices.db`, pre-seeded, zero-config). MySQL remains available via env vars or `config.local.php` (`DB_DRIVER = 'mysql'`), with automatic SQLite fallback if MySQL is down.
 - If SSH key-based auth is preferred, add your local `~/.ssh/id_*.pub` to the server's `~/.ssh/authorized_keys` after first login.
