@@ -399,6 +399,7 @@ function initDatabaseSchema(): void {
     $userCount = (int)$db->query("SELECT COUNT(*) FROM users")->fetchColumn();
     if ($userCount === 0) {
         $hashed = password_hash('123456789', PASSWORD_DEFAULT);
+        $hashedStaff = password_hash('yaramay2026', PASSWORD_DEFAULT);
         $insertUser = $db->prepare("
             INSERT INTO users (username, password, full_name, role, email)
             VALUES (?, ?, ?, ?, ?)
@@ -409,6 +410,20 @@ function initDatabaseSchema(): void {
             'Mr. Ibraheem (Superadmin)',
             'superadmin',
             'ibraheem@yaramay.online'
+        ]);
+        $insertUser->execute([
+            'fawas01',
+            $hashedStaff,
+            'Mr. Fawas',
+            'admin',
+            'fawas@yaramay.online'
+        ]);
+        $insertUser->execute([
+            'admin',
+            $hashedStaff,
+            'Yaramay Administrator',
+            'admin',
+            'admin@yaramay.online'
         ]);
     }
 }

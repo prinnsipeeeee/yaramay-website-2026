@@ -73,9 +73,10 @@ The database is pre-seeded with all verified clients and invoices from the offic
 ### 5. Secure Admin Authentication & User Management
 - **Protected Admin Dashboard (`index.php`)**:
   - Secure login portal at `login.php`.
-  - Default Superadmin Account:
-    - **Username**: `ibraheem01`
-    - **Password**: `123456789`
+  - Seeded Accounts (change these passwords after first login):
+    - **Superadmin** — Username: `ibraheem01` / Password: `123456789`
+    - **Admin** — Username: `fawas01` / Password: `yaramay2026`
+    - **Admin** — Username: `admin` / Password: `yaramay2026`
 - **Admin Users Access Control (`view-users`)**:
   - Admins can view all administrator accounts.
   - **Add New Admin**: Create additional admin or superadmin users with custom usernames, passwords, and permissions.

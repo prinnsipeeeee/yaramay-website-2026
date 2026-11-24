@@ -56,7 +56,9 @@ CREATE TABLE IF NOT EXISTS `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 INSERT INTO `users` (`id`, `username`, `password`, `full_name`, `role`, `email`, `created_at`) VALUES
-(1, 'ibraheem01', '$2y$10$o8Wdt8tnTHgbrRQqLzsbLeBAHDWZm3djlxNWNukqINxA.ZmXVsVie', 'Mr. Ibraheem (Superadmin)', 'superadmin', 'ibraheem@yaramay.online', CURRENT_TIMESTAMP)
+(1, 'ibraheem01', '$2y$10$o8Wdt8tnTHgbrRQqLzsbLeBAHDWZm3djlxNWNukqINxA.ZmXVsVie', 'Mr. Ibraheem (Superadmin)', 'superadmin', 'ibraheem@yaramay.online', CURRENT_TIMESTAMP),
+(2, 'fawas01', '$2y$12$HZGtqR3xWYUz1aAWMqjLluIFMC6nlWMH86HS5B4ygDHa//yVtNFPO', 'Mr. Fawas', 'admin', 'fawas@yaramay.online', CURRENT_TIMESTAMP),
+(3, 'admin', '$2y$12$bxpFna3Eg1AI44wNG/uI8.QmcGNiSWu82cgWNRkQJjkQ42AFOaiYG', 'Yaramay Administrator', 'admin', 'admin@yaramay.online', CURRENT_TIMESTAMP)
 ON DUPLICATE KEY UPDATE `full_name`=VALUES(`full_name`);
 
 -- ----------------------------
