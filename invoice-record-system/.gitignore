@@ -1,0 +1,8 @@
+# Ignore session files and temporary logs
+data/sessions/*
+!data/sessions/.gitkeep
+*.log
+
+# Ignore local hosting credentials
+config.local.php
+.env

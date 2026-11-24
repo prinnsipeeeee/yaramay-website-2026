@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: yaramay-invoice-system
+    runtime: docker
+    plan: free
+    autoDeploy: true
+    envVars:
+      # Uses built-in SQLite out of the box (change to 'mysql' and add DB_* vars if using external MySQL)
+      - key: DB_DRIVER
+        value: sqlite
+      # Optional: if you attach a Render Persistent Disk mounted at /var/data, uncomment below:
+      # - key: DATA_DIR
+      #   value: /var/data

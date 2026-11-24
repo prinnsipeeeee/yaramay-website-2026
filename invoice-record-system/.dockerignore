@@ -1,0 +1,12 @@
+.git
+.gitignore
+.gitattributes
+README.md
+DEPLOY.md
+render.yaml
+config.local.php
+config.local.example.php
+.env
+*.log
+data/sessions/*
+!data/sessions/.gitkeep

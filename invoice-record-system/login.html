@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login - YARAMAY Computer Maintenance Services</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="icon" type="image/png" href="assets/images/favicon.png">
+
+    <style>
+        body {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 50%, #172554 100%);
+            padding: 20px;
+            font-family: 'Inter', sans-serif;
+            direction: ltr;
+            text-align: left;
+        }
+
+        .login-card {
+            background: #ffffff;
+            width: 100%;
+            max-width: 440px;
+            border-radius: 16px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .login-header {
+            background: linear-gradient(180deg, #172554 0%, #1e3a8a 100%);
+            padding: 32px 24px 24px 24px;
+            text-align: center;
+            color: #ffffff;
+            position: relative;
+        }
+
+        .login-body {
+            padding: 28px 24px;
+        }
+
+        .login-alert-error {
+            background: #fee2e2;
+            border: 1px solid #fca5a5;
+            color: #991b1b;
+            padding: 10px 14px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            display: none;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 13px;
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 6px;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 11px 14px;
+            border: 1.5px solid #cbd5e1;
+            border-radius: 8px;
+            font-size: 14px;
+            color: #0f172a;
+            transition: all 0.2s ease;
+            outline: none;
+            box-sizing: border-box;
+        }
+
+        .form-input:focus {
+            border-color: #1e3a8a;
+            box-shadow: 0 0 0 3px rgba(30, 58, 138, 0.15);
+        }
+
+        .btn-login {
+            width: 100%;
+            padding: 13px;
+            background: #1e3a8a;
+            color: #ffffff;
+            border: none;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 8px;
+        }
+
+        .btn-login:hover {
+            background: #172554;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(30, 58, 138, 0.35);
+        }
+
+        .credentials-hint {
+            margin-top: 22px;
+            background: #f8fafc;
+            border: 1px dashed #cbd5e1;
+            padding: 12px;
+            border-radius: 8px;
+            font-size: 12px;
+            color: #475569;
+        }
+
+        .credentials-hint strong {
+            color: #0f172a;
+        }
+
+        .portal-link-box {
+            margin-top: 20px;
+            text-align: center;
+            border-top: 1px solid #e2e8f0;
+            padding-top: 16px;
+        }
+
+        .portal-link-box a {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            color: #dc2626;
+            font-weight: 700;
+            font-size: 13px;
+            text-decoration: none;
+            transition: color 0.15s ease;
+        }
+
+        .portal-link-box a:hover {
+            color: #b91c1c;
+            text-decoration: underline;
+        }
+
+        @media (max-width: 480px) {
+            body { padding: 12px; }
+            .login-header { padding: 24px 16px 18px 16px; }
+            .login-body { padding: 22px 18px; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="login-card">
+    <div class="login-header">
+        <div style="background:#ffffff; border-radius:12px; padding:10px 16px; display:inline-flex; align-items:center; justify-content:center; margin-bottom:12px; box-shadow:0 4px 14px rgba(0,0,0,0.2);">
+            <img src="assets/images/yaramay-logo.png" alt="YARAMAY Computer Maintenance Services" style="height:62px; width:auto; display:block;">
+        </div>
+        <p style="font-size:12px; color:#bfdbfe; font-weight:600; margin:0; letter-spacing:0.5px;">Computer Maintenance Services • Admin Portal</p>
+    </div>
+
+    <div class="login-body">
+        <div class="login-alert-error" id="loginErrorBox">
+            <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            <span id="loginErrorText"></span>
+        </div>
+
+        <form id="staticLoginForm">
+            <div class="form-group">
+                <label for="username">Admin Username</label>
+                <input type="text" id="username" name="username" class="form-input" placeholder="e.g. ibraheem01" value="ibraheem01" required autofocus>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" class="form-input" placeholder="Enter your password" required>
+            </div>
+
+            <button type="submit" class="btn-login" id="loginSubmitBtn">
+                <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"/></svg>
+                Sign In to Admin Dashboard
+            </button>
+        </form>
+
+        <div class="credentials-hint">
+            <div style="font-weight:700; margin-bottom:4px; color:#1e3a8a;">Default Superadmin Credentials:</div>
+            <div>Username: <strong>ibraheem01</strong> &nbsp;|&nbsp; Password: <strong>123456789</strong></div>
+            <div style="font-size:11px; color:#64748b; margin-top:4px;">(Password and username can be edited inside the dashboard)</div>
+        </div>
+
+        <div class="portal-link-box">
+            <span style="font-size:12px; color:#64748b; display:block; margin-bottom:4px;">Are you a client submitting a payment or invoice?</span>
+            <a href="portal.html">
+                Go to Dedicated Client Invoice Portal &rarr;
+            </a>
+        </div>
+    </div>
+</div>
+
+<script src="assets/js/local-backend.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    // If already actively logged in, go to dashboard
+    if (window.YaramayBackend && window.YaramayBackend.getSessionUser(false)) {
+        window.location.href = 'index.html';
+        return;
+    }
+
+    const form = document.getElementById('staticLoginForm');
+    const errBox = document.getElementById('loginErrorBox');
+    const errText = document.getElementById('loginErrorText');
+
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        errBox.style.display = 'none';
+        const username = document.getElementById('username').value.trim();
+        const password = document.getElementById('password').value.trim();
+
+        const res = await window.YaramayBackend.login(username, password);
+        if (res.success) {
+            window.location.href = 'index.html';
+        } else {
+            errText.textContent = res.message || 'Invalid credentials.';
+            errBox.style.display = 'flex';
+        }
+    });
+});
+</script>
+</body>
+</html>

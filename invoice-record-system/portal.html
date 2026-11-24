@@ -1,0 +1,961 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Client Invoice Portal - YARAMAY Computer Maintenance Services</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="icon" type="image/png" href="assets/images/favicon.png">
+
+    <style>
+        body {
+            background-color: #f1f5f9;
+            color: #0f172a;
+            font-family: 'Inter', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .portal-navbar {
+            background: linear-gradient(135deg, #172554 0%, #1e3a8a 100%);
+            color: #ffffff;
+            padding: 16px 24px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        .portal-navbar-inner {
+            max-width: 960px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .portal-brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            color: #ffffff;
+        }
+
+        .portal-brand h1 {
+            font-size: 18px;
+            font-weight: 800;
+            letter-spacing: 2px;
+            margin: 0;
+            line-height: 1.2;
+        }
+
+        .portal-brand span {
+            font-size: 11px;
+            color: #bfdbfe;
+            display: block;
+        }
+
+        .portal-header-action a {
+            background: rgba(255, 255, 255, 0.15);
+            color: #ffffff;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 12.5px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .portal-header-action a:hover {
+            background: rgba(255, 255, 255, 0.25);
+        }
+
+        .portal-container {
+            max-width: 960px;
+            margin: 32px auto;
+            padding: 0 20px;
+            flex: 1;
+            width: 100%;
+        }
+
+        .portal-hero {
+            background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+            border: 1px solid #bfdbfe;
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .hero-title {
+            font-size: 22px;
+            font-weight: 800;
+            color: #1e3a8a;
+            margin-bottom: 6px;
+        }
+
+        .hero-desc {
+            font-size: 13.5px;
+            color: #334155;
+            line-height: 1.5;
+        }
+
+        .gcash-badge-card {
+            background: #ffffff;
+            border: 1px solid #93c5fd;
+            border-radius: 10px;
+            padding: 12px 18px;
+            min-width: 260px;
+            box-shadow: 0 2px 6px rgba(30, 58, 138, 0.08);
+            border-left: 4px solid #dc2626;
+        }
+
+        .gcash-badge-title {
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: #dc2626;
+            margin-bottom: 2px;
+        }
+
+        .gcash-badge-name {
+            font-size: 15px;
+            font-weight: 800;
+            color: #0f172a;
+        }
+
+        .gcash-badge-num {
+            font-size: 16px;
+            font-weight: 800;
+            color: #1e3a8a;
+            letter-spacing: 1px;
+        }
+
+        .portal-card {
+            background: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+            border: 1px solid #e2e8f0;
+            padding: 28px;
+            margin-bottom: 24px;
+        }
+
+        .section-header-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 14px;
+            background: #eff6ff;
+            color: #1e3a8a;
+            font-weight: 700;
+            font-size: 13px;
+            border-radius: 20px;
+            margin-bottom: 16px;
+            border: 1px solid #bfdbfe;
+        }
+
+        .form-row-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+            margin-bottom: 16px;
+        }
+
+        .form-field {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .form-field label {
+            font-size: 13px;
+            font-weight: 700;
+            color: #1e293b;
+        }
+
+        .form-field input, .form-field select, .form-field textarea {
+            padding: 10px 14px;
+            border: 1.5px solid #cbd5e1;
+            border-radius: 8px;
+            font-size: 13.5px;
+            color: #0f172a;
+            outline: none;
+            transition: all 0.2s ease;
+            background: #ffffff;
+        }
+
+        .form-field input:focus, .form-field select:focus, .form-field textarea:focus {
+            border-color: #1e3a8a;
+            box-shadow: 0 0 0 3px rgba(30, 58, 138, 0.15);
+        }
+
+        .plan-box-container {
+            background: #f8fafc;
+            border: 1.5px solid #cbd5e1;
+            border-radius: 10px;
+            padding: 18px;
+            margin-bottom: 20px;
+        }
+
+        .plan-options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 8px;
+            margin-bottom: 14px;
+        }
+
+        .plan-radio-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 16px;
+            background: #ffffff;
+            border: 1.5px solid #cbd5e1;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 13.5px;
+            transition: all 0.15s ease;
+        }
+
+        .plan-radio-label:hover {
+            border-color: #1e3a8a;
+            background: #eff6ff;
+        }
+
+        .plan-radio-label input:checked + span {
+            color: #1e3a8a;
+            font-weight: 700;
+        }
+
+        .formula-card {
+            background: #ffffff;
+            border: 1.5px solid #60a5fa;
+            border-radius: 8px;
+            padding: 14px 18px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 2px 8px rgba(37, 99, 235, 0.08);
+        }
+
+        .formula-monthly {
+            font-size: 20px;
+            font-weight: 800;
+            color: #1e3a8a;
+        }
+
+        .formula-text {
+            font-size: 13px;
+            font-weight: 600;
+            color: #475569;
+        }
+
+        .btn-submit-portal {
+            background: #1e3a8a;
+            color: #ffffff;
+            border: none;
+            padding: 14px 28px;
+            font-size: 16px;
+            font-weight: 700;
+            border-radius: 8px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 12px rgba(30, 58, 138, 0.25);
+        }
+
+        .btn-submit-portal:hover {
+            background: #172554;
+            transform: translateY(-1px);
+            box-shadow: 0 6px 16px rgba(30, 58, 138, 0.35);
+        }
+
+        /* Success Submission Modal / Overlay */
+        .portal-modal-backdrop {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(15, 23, 42, 0.7);
+            z-index: 9999;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .portal-modal-content {
+            background: #ffffff;
+            border-radius: 16px;
+            max-width: 540px;
+            width: 100%;
+            padding: 32px 28px;
+            text-align: center;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.25);
+            animation: modalFadeIn 0.3s ease;
+        }
+
+        @keyframes modalFadeIn {
+            from { transform: scale(0.95); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        .success-icon-circle {
+            width: 64px;
+            height: 64px;
+            background: #dcfce7;
+            color: #15803d;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 16px auto;
+        }
+
+        .portal-footer {
+            background: #ffffff;
+            border-top: 1px solid #e2e8f0;
+            padding: 20px 24px;
+            text-align: center;
+            font-size: 12.5px;
+            color: #64748b;
+        }
+
+        .portal-footer a {
+            color: #1e3a8a;
+            text-decoration: underline;
+            font-weight: 600;
+        }
+
+        @media (max-width: 768px) {
+            .portal-navbar {
+                padding: 12px 16px;
+            }
+            .portal-navbar-inner {
+                flex-wrap: wrap;
+                gap: 12px;
+            }
+            .portal-container {
+                margin: 18px auto;
+                padding: 0 14px;
+            }
+            .portal-card {
+                padding: 18px 16px;
+            }
+            .form-row-grid {
+                grid-template-columns: 1fr;
+            }
+            .portal-hero {
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 18px;
+            }
+            .gcash-badge-card {
+                width: 100%;
+                min-width: 0;
+            }
+            .formula-card {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 6px;
+            }
+            .btn-submit-portal {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Top Navigation -->
+<header class="portal-navbar">
+    <div class="portal-navbar-inner">
+        <a href="portal.html" class="portal-brand" style="display:flex; align-items:center; gap:12px; text-decoration:none;">
+            <div style="background:#ffffff; padding:4px 8px; border-radius:8px; display:flex; align-items:center; justify-content:center; box-shadow:0 2px 8px rgba(0,0,0,0.15);">
+                <img src="assets/images/yaramay-logo.png" alt="YARAMAY Logo" style="height:40px; width:auto; display:block;">
+            </div>
+            <div>
+                <h1 style="margin:0; font-size:18px; font-weight:800; letter-spacing:1px; color:#ffffff;">Y A R A M A Y</h1>
+                <span style="font-size:11px; color:#bfdbfe; font-weight:500;">Client Invoice & Payment Request Portal</span>
+            </div>
+        </a>
+
+        <div class="portal-header-action">
+            <a href="login.html" title="Staff / Admin Sign In">
+                <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"/></svg>
+                Staff / Admin Login
+            </a>
+        </div>
+    </div>
+</header>
+
+<main class="portal-container">
+
+    <!-- Hero Information & GCash Badge -->
+    <div class="portal-hero">
+        <div>
+            <div class="hero-title">Submit Invoice or Payment Request</div>
+            <div class="hero-desc">
+                Fill up your company details and select your payment terms (Full Payment, 3 Months, or 6 Months installment plan). We will automatically generate your official invoice.
+            </div>
+        </div>
+
+        <div class="gcash-badge-card">
+            <div class="gcash-badge-title">Official GCash Payment Channel</div>
+            <div class="gcash-badge-name">Ferdenand Sabado</div>
+            <div class="gcash-badge-num">09617190588</div>
+        </div>
+    </div>
+
+    <!-- Main Fill-up Card -->
+    <div class="portal-card">
+        <form id="clientPortalForm" onsubmit="submitClientPortalForm(event)">
+
+            <!-- 1. Client Company Information -->
+            <div class="section-header-pill">
+                <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
+                1. Client & Company Information
+            </div>
+
+            <div class="form-row-grid">
+                <div class="form-field">
+                    <label>Company / Organization Name *</label>
+                    <input type="text" name="client_name" id="cClientName" placeholder="e.g. Brilliant Minds Inc. / The Jobconnection" required>
+                </div>
+                <div class="form-field">
+                    <label>Contact Person / Authorized Representative</label>
+                    <input type="text" name="contact_person" id="cContactPerson" placeholder="e.g. Ms. Pilar R. Corporal / Mr. Allan Rom">
+                </div>
+            </div>
+
+            <div class="form-row-grid">
+                <div class="form-field">
+                    <label>Contact Mobile / Phone *</label>
+                    <input type="text" name="phone" id="cPhone" placeholder="e.g. +639075251376 / 09617190588" required>
+                </div>
+                <div class="form-field">
+                    <label>Email Address</label>
+                    <input type="email" name="email" id="cEmail" placeholder="e.g. accounts@client.com">
+                </div>
+            </div>
+
+            <div class="form-field" style="margin-bottom: 20px;">
+                <label>Complete Billing Address *</label>
+                <input type="text" name="address" id="cAddress" placeholder="e.g. Midland Plaza Adriatico Manila / Ped Gil, Manila" required>
+            </div>
+
+            <!-- 2. Services & Price -->
+            <div class="section-header-pill">
+                <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
+                2. Service Package & Pricing
+            </div>
+
+            <!-- Package & Pricing Option Dropdown from Official PDF Contracts -->
+            <div class="form-field" style="margin-bottom: 16px;">
+                <label style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:4px;">
+                    <span style="font-size:13px; font-weight:700; color:#0f172a;">Select Service Package & Pricing Option *</span>
+                    <span style="font-size:11.5px; font-weight:600; color:#1e3a8a;">(Auto-fills service scope, pricing & inclusions from official contract)</span>
+                </label>
+                <select id="packagePresetSelect" onchange="onPackagePresetChange(this.value)" style="font-weight:700; color:#1e3a8a; background:#f0f9ff; border:1.5px solid #0284c7; padding:11px 14px; border-radius:8px; cursor:pointer; font-size:13.5px; width:100%;">
+                    <option value="pkg_jobconnection">📦 Package 1: The Jobconnection — E-Commerce & Web Maintenance (QMS) [₱7,500.00 / month]</option>
+                    <option value="pkg_brilliant">🏢 Package 2: Brilliant Minds Inc. — Full Annual Contract [₱90,000.00 / year or ₱7,500 / mo]</option>
+                    <option value="pkg_joseline">🖥️ Package 3: Joseline Manpower — Hardware & E-mail Server Maintenance [₱5,500.00 / month]</option>
+                    <option value="pkg_simsoh">🌐 Package 4: Simsoh Agency — Web and System (Online) Maintenance [₱5,000.00 / month]</option>
+                    <option value="custom">✏️ Custom Package / Custom Pricing</option>
+                </select>
+            </div>
+
+            <div class="form-row-grid">
+                <div class="form-field">
+                    <label>Service Package Name *</label>
+                    <input type="text" name="service_name" id="cServiceName" value="Package of E-Commerce Maintenance Services and Web maintenance including Rescue System (QMS)" required>
+                </div>
+                <div class="form-field">
+                    <label>Overall Total Price (PHP) *</label>
+                    <input type="number" step="0.01" min="1" name="price" id="cPrice" value="7500.00" oninput="calculateLiveFormula()" required>
+                </div>
+            </div>
+
+            <!-- 3. Payment Plan & Live Installment Formula -->
+            <div class="plan-box-container">
+                <label style="font-size: 13.5px; font-weight: 700; color: #1e3a8a; display: block;">
+                    📅 Select Payment Plan (Full Payment or Installment Term):
+                </label>
+
+                <div class="plan-options">
+                    <label class="plan-radio-label">
+                        <input type="radio" name="payment_term" value="full" onchange="calculateLiveFormula()">
+                        <span>Full Payment (1x)</span>
+                    </label>
+
+                    <label class="plan-radio-label">
+                        <input type="radio" name="payment_term" value="3_months" checked onchange="calculateLiveFormula()">
+                        <span>3 Months Installment (÷ 3)</span>
+                    </label>
+
+                    <label class="plan-radio-label">
+                        <input type="radio" name="payment_term" value="6_months" onchange="calculateLiveFormula()">
+                        <span>6 Months Installment (÷ 6)</span>
+                    </label>
+                </div>
+
+                <!-- Formula Calculation Card -->
+                <div class="formula-card" id="formulaCard">
+                    <div>
+                        <span style="font-size: 11px; font-weight: 700; text-transform: uppercase; color: #64748b; letter-spacing: 0.5px;">Live Monthly Payment Formula</span>
+                        <div class="formula-monthly" id="displayMonthly">PHP 6,666.67 / month</div>
+                    </div>
+                    <div class="formula-text" id="displayFormulaText">
+                        ₱20,000.00 ÷ 3 Months = ₱6,666.67 / month
+                    </div>
+                </div>
+            </div>
+
+            <!-- 4. Payment Channel & Partner Assignment -->
+            <div class="section-header-pill">
+                <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
+                3. Payment Channel & Account Officer
+            </div>
+
+            <div class="form-row-grid">
+                <div class="form-field">
+                    <label>Payment Channel *</label>
+                    <select name="payment_method" id="cPaymentMethod" style="font-weight: 600;" onchange="togglePaymentChannel(this.value)">
+                        <option value="gcash">GCash (Ferdenand Sabado - 09617190588)</option>
+                        <option value="cash">Cash Payment</option>
+                    </select>
+                </div>
+
+                <div class="form-field">
+                    <label>Account Officer / Partner Share *</label>
+                    <select name="partner_assigned" id="cPartnerAssigned" style="font-weight: 600;">
+                        <option value="both">Both (Mr. Ibraheem & Mr. Fawas - 50/50 Split)</option>
+                        <option value="ibraheem">Mr. Ibraheem (100% Share)</option>
+                        <option value="fawas">Mr. Fawas (100% Share)</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- GCash Payment & Screenshot Upload Container -->
+            <div id="gcashPaymentBox" style="background:#f0fdf4; border:1.5px solid #86efac; border-radius:10px; padding:18px; margin-bottom:20px;">
+                <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px; margin-bottom:12px;">
+                    <div style="display:flex; align-items:center; gap:10px;">
+                        <span style="background:#007dfc; color:#ffffff; font-weight:800; font-size:12px; padding:3px 10px; border-radius:6px; letter-spacing:0.5px;">GCASH PAYMENT</span>
+                        <strong style="color:#0f172a; font-size:14px;">Official Account Details</strong>
+                    </div>
+                    <div style="font-size:12.5px; color:#15803d; font-weight:700;">
+                        Amount to Pay: <span id="gcashPayAmount" style="font-size:15px; color:#0f172a; font-weight:800;">PHP 6,666.67</span>
+                    </div>
+                </div>
+
+                <div style="background:#ffffff; border:1px solid #bbf7d0; border-radius:8px; padding:12px 16px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; margin-bottom:12px;">
+                    <div>
+                        <div style="font-size:11px; color:#64748b; text-transform:uppercase; font-weight:700;">Account Name</div>
+                        <div style="font-size:15px; font-weight:800; color:#0f172a;">Ferdenand Sabado</div>
+                    </div>
+                    <div>
+                        <div style="font-size:11px; color:#64748b; text-transform:uppercase; font-weight:700;">GCash Number</div>
+                        <div style="font-size:16px; font-weight:800; color:#007dfc; font-family:monospace;">09617190588</div>
+                    </div>
+                    <button type="button" onclick="copyGcashNumber()" class="btn btn-sm btn-outline" style="border-color:#007dfc; color:#007dfc; padding:6px 14px; border-radius:6px; font-weight:700; cursor:pointer;" id="copyBtn">
+                        📋 Copy Number
+                    </button>
+                </div>
+
+                <!-- Payment Instructions -->
+                <div style="font-size:12px; color:#334155; line-height:1.6; margin-bottom:14px; background:rgba(255,255,255,0.7); padding:10px 14px; border-radius:6px;">
+                    <strong>Instructions:</strong> Open your GCash App &rarr; Send Money to <strong>09617190588</strong> (Ferdenand Sabado) &rarr; Take a screenshot of the payment receipt &rarr; Upload it below to submit directly to Admin.
+                </div>
+
+                <!-- Screenshot Upload Field -->
+                <div>
+                    <label style="display:block; font-size:13px; font-weight:700; color:#0f172a; margin-bottom:6px;">
+                        Upload GCash Payment Screenshot / Receipt *
+                    </label>
+                    
+                    <div id="uploadDropzone" style="border:2px dashed #86efac; background:#ffffff; border-radius:8px; padding:20px; text-align:center; cursor:pointer; transition:border-color 0.2s;" onclick="document.getElementById('cPaymentReceipt').click()">
+                        <input type="file" name="payment_receipt" id="cPaymentReceipt" accept="image/png, image/jpeg, image/jpg, image/webp, application/pdf" style="display:none;" onchange="handleReceiptSelect(event)">
+                        
+                        <div id="uploadPrompt">
+                            <svg width="36" height="36" fill="none" stroke="#16a34a" viewBox="0 0 24 24" style="margin:0 auto 8px auto; display:block;"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+                            <span style="font-size:13px; font-weight:700; color:#15803d; display:block;">Click to Upload or Drag & Drop GCash Screenshot here</span>
+                            <span style="font-size:11.5px; color:#64748b; display:block; margin-top:2px;">PNG, JPG, JPEG, WEBP or PDF (Max 8MB)</span>
+                        </div>
+
+                        <!-- Live Preview -->
+                        <div id="receiptPreviewContainer" style="display:none; align-items:center; justify-content:center; gap:16px; flex-wrap:wrap;">
+                            <img id="receiptPreviewImg" src="" alt="Receipt Preview" style="max-height:120px; max-width:180px; object-fit:contain; border-radius:6px; border:1px solid #cbd5e1; box-shadow:0 2px 6px rgba(0,0,0,0.1);">
+                            <div style="text-align:left;">
+                                <div id="receiptFileName" style="font-weight:700; font-size:13px; color:#0f172a;"></div>
+                                <div id="receiptFileSize" style="font-size:11px; color:#64748b; margin-top:2px;"></div>
+                                <button type="button" onclick="removeReceipt(event)" style="margin-top:6px; background:#fee2e2; color:#dc2626; border:none; padding:4px 10px; border-radius:4px; font-size:11px; font-weight:700; cursor:pointer;">
+                                    ✕ Remove & Choose Another
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Cash Payment Note Container (Hidden by default) -->
+            <div id="cashPaymentBox" style="display:none; background:#f8fafc; border:1.5px solid #cbd5e1; border-radius:10px; padding:16px; margin-bottom:20px;">
+                <div style="display:flex; align-items:center; gap:10px; margin-bottom:6px;">
+                    <span style="background:#475569; color:#ffffff; font-weight:800; font-size:12px; padding:3px 10px; border-radius:6px;">CASH PAYMENT</span>
+                    <strong style="color:#0f172a; font-size:14px;">Direct Cash Settlement</strong>
+                </div>
+                <p style="font-size:12.5px; color:#475569; line-height:1.5; margin:0;">
+                    Your cash payment will be collected and recorded by your assigned Account Officer. You will receive an official printed receipt upon turnover.
+                </p>
+            </div>
+
+            <div class="form-field" style="margin-bottom: 16px;">
+                <label>Package Inclusions & Technical Scope</label>
+                <textarea name="service_description" id="cServiceDesc" rows="4">Includes: 1. Web design / Web system, 2. Job post / Job Offer, 3 Deployment System (QMS), 4. Maintenance System, 5. Location Rescue system, 6. E-commerce site with SSL Security, 7. PRA Deployment, 8. FRA/SRA SYSTEM (IF NEEDED), 9. Block Listing for OFW, 10. Voucher System. Hosting and domain with SSL security.
+--- Nothing Follows ---</textarea>
+            </div>
+
+            <div class="form-field" style="margin-bottom: 24px;">
+                <label>Additional Notes / Specific Instructions</label>
+                <textarea name="notes" id="cNotes" rows="2" placeholder="Any specific requirements, billing cycle or invoice references..."></textarea>
+            </div>
+
+            <button type="submit" class="btn-submit-portal" id="submitBtn">
+                <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                <span>Submit Invoice Request</span>
+            </button>
+        </form>
+    </div>
+
+</main>
+
+<!-- Success Modal Overlay -->
+<div class="portal-modal-backdrop" id="successModal">
+    <div class="portal-modal-content">
+        <div class="success-icon-circle">
+            <svg width="34" height="34" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+        </div>
+        <h2 style="font-size:22px; font-weight:800; color:#0f172a; margin-bottom:8px;">Invoice Request Received!</h2>
+        <p style="font-size:14px; color:#475569; margin-bottom:18px;" id="modalMessage">
+            Your request has been saved and registered into our official records.
+        </p>
+
+        <!-- Invoice Details Box -->
+        <div style="background:#f8fafc; border:1px solid #cbd5e1; border-radius:10px; padding:16px; margin-bottom:20px; text-align:left;">
+            <div style="display:flex; justify-content:space-between; margin-bottom:6px;">
+                <span style="font-size:13px; color:#64748b;">Invoice Number:</span>
+                <strong style="font-size:14px; color:#1e3a8a;" id="resInvoiceNum">#00000</strong>
+            </div>
+            <div style="display:flex; justify-content:space-between; margin-bottom:6px;">
+                <span style="font-size:13px; color:#64748b;">Total Amount:</span>
+                <strong style="font-size:14px; color:#0f172a;" id="resTotal">PHP 0.00</strong>
+            </div>
+            <div style="display:flex; justify-content:space-between; margin-bottom:6px;" id="resMonthlyRow">
+                <span style="font-size:13px; color:#64748b;">Monthly Payment:</span>
+                <strong style="font-size:14px; color:#15803d;" id="resMonthly">PHP 0.00 / month</strong>
+            </div>
+            <div style="display:flex; justify-content:space-between; margin-bottom:6px;" id="resReceiptRow">
+                <span style="font-size:13px; color:#64748b;">GCash Screenshot:</span>
+                <strong style="font-size:13px; color:#16a34a;" id="resReceiptStatus">✅ Uploaded & Sent to Admin</strong>
+            </div>
+            <div style="display:flex; justify-content:space-between; border-top:1px dashed #cbd5e1; padding-top:8px; margin-top:8px;">
+                <span style="font-size:12px; color:#64748b;">GCash Recipient:</span>
+                <strong style="font-size:12.5px; color:#dc2626;">Ferdenand Sabado (09617190588)</strong>
+            </div>
+        </div>
+
+        <div style="display:flex; gap:10px; justify-content:center; flex-wrap:wrap;">
+            <a href="#" id="viewPrintBtn" target="_blank" class="btn-submit-portal" style="font-size:14px; padding:10px 20px; text-decoration:none;">
+                <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"/></svg>
+                View & Print Invoice
+            </a>
+            <button onclick="closeModalAndReset()" style="background:#f1f5f9; border:1px solid #cbd5e1; color:#334155; padding:10px 18px; border-radius:8px; font-weight:600; cursor:pointer;">
+                Submit Another Request
+            </button>
+        </div>
+    </div>
+</div>
+
+<footer class="portal-footer">
+    <div><strong>YARAMAY Computer Maintenance Services</strong></div>
+    <div>Cambridge C5 -1G • Contact: +639075251376 (SMS) / +966508624264 • <a href="https://www.yaramay.online" target="_blank">www.yaramay.online</a></div>
+    <div style="margin-top: 6px;">GCash Account: <strong>Ferdenand Sabado</strong> (<strong>09617190588</strong>)</div>
+    <div style="margin-top: 8px;"><a href="login.html">Internal Staff / Admin Portal &rarr;</a></div>
+</footer>
+
+<script src="assets/js/local-backend.js"></script>
+<script>
+function togglePaymentChannel(method) {
+    const gcashBox = document.getElementById('gcashPaymentBox');
+    const cashBox = document.getElementById('cashPaymentBox');
+    if (method === 'gcash') {
+        if (gcashBox) gcashBox.style.display = 'block';
+        if (cashBox) cashBox.style.display = 'none';
+    } else {
+        if (gcashBox) gcashBox.style.display = 'none';
+        if (cashBox) cashBox.style.display = 'block';
+    }
+}
+
+function copyGcashNumber() {
+    const num = '09617190588';
+    navigator.clipboard.writeText(num).then(() => {
+        const btn = document.getElementById('copyBtn');
+        btn.textContent = '✅ Copied!';
+        setTimeout(() => { btn.textContent = '📋 Copy Number'; }, 2000);
+    }).catch(() => {
+        prompt('Copy GCash Number:', num);
+    });
+}
+
+let compressedReceiptBlob = null;
+
+function handleReceiptSelect(e) {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    const previewImg = document.getElementById('receiptPreviewImg');
+    const previewContainer = document.getElementById('receiptPreviewContainer');
+    const promptBox = document.getElementById('uploadPrompt');
+    const fileName = document.getElementById('receiptFileName');
+    const fileSize = document.getElementById('receiptFileSize');
+
+    fileName.textContent = file.name;
+    fileSize.textContent = 'Optimizing image...';
+
+    if (file.type.startsWith('image/')) {
+        const reader = new FileReader();
+        reader.onload = function(evt) {
+            const img = new Image();
+            img.onload = function() {
+                try {
+                    const maxDim = 1200;
+                    let width = img.width;
+                    let height = img.height;
+                    if (width > maxDim || height > maxDim) {
+                        if (width > height) {
+                            height = Math.round((height * maxDim) / width);
+                            width = maxDim;
+                        } else {
+                            width = Math.round((width * maxDim) / height);
+                            height = maxDim;
+                        }
+                    }
+                    const canvas = document.createElement('canvas');
+                    canvas.width = width;
+                    canvas.height = height;
+                    const ctx = canvas.getContext('2d');
+                    ctx.drawImage(img, 0, 0, width, height);
+
+                    canvas.toBlob((blob) => {
+                        if (blob && blob.size < file.size) {
+                            compressedReceiptBlob = blob;
+                            fileSize.textContent = (blob.size / 1024).toFixed(1) + ' KB (Optimized)';
+                            previewImg.src = URL.createObjectURL(blob);
+                        } else {
+                            compressedReceiptBlob = file;
+                            fileSize.textContent = (file.size / 1024).toFixed(1) + ' KB';
+                            previewImg.src = evt.target.result;
+                        }
+                        previewImg.style.display = 'block';
+                    }, 'image/jpeg', 0.82);
+                } catch (cErr) {
+                    compressedReceiptBlob = file;
+                    fileSize.textContent = (file.size / 1024).toFixed(1) + ' KB';
+                    previewImg.src = evt.target.result;
+                    previewImg.style.display = 'block';
+                }
+            };
+            img.src = evt.target.result;
+        };
+        reader.readAsDataURL(file);
+    } else {
+        compressedReceiptBlob = file;
+        fileSize.textContent = (file.size / 1024).toFixed(1) + ' KB';
+        previewImg.style.display = 'none';
+    }
+
+    promptBox.style.display = 'none';
+    previewContainer.style.display = 'flex';
+}
+
+function removeReceipt(e) {
+    if (e) e.stopPropagation();
+    const input = document.getElementById('cPaymentReceipt');
+    input.value = '';
+    compressedReceiptBlob = null;
+    document.getElementById('receiptPreviewImg').src = '';
+    document.getElementById('receiptPreviewContainer').style.display = 'none';
+    document.getElementById('uploadPrompt').style.display = 'block';
+}
+
+const OFFICIAL_PACKAGES = {
+    pkg_jobconnection: {
+        name: "Package of E-Commerce Maintenance Services and Web maintenance including Rescue System (QMS)",
+        price: 7500.00,
+        inclusions: `Includes: 1. Web design / Web system\n2. Job post / Job Offer\n3 Deployment System (QMS)\n4. Maintenance System\n5. Location Rescue system\n6. E-commerce site with SSL Security\n7. PRA Deployment\n8. FRA/SRA SYSTEM (IF NEEDED)\n9. Block Listing for OFW\n10. Voucher System\nHosting and domain, with SSL security\n--- Nothing Follows ---`
+    },
+    pkg_brilliant: {
+        name: "Package of E-Commerce Maintenance Services and Web maintenance including Rescue System (Annual Contract)",
+        price: 90000.00,
+        inclusions: `Includes: 1. Web design / Web system\n2. Job post / Job Offer\n3 Deployment System\n4. Company E-mail Server Maintenance\n5. Location Rescue system\n6. E-commerce site with SSL Security\n7. PRA Deployment\n8. FRA/SRA SYSTEM (IF NEEDED)\n9. Block Listing for OFW\n10. Voucher System\nHosting and domain, with SSL security\n--- Nothing Follows ---`
+    },
+    pkg_joseline: {
+        name: "Package of E-Commerce Maintenance Services and Web maintenance including Hardware & Email Server",
+        price: 5500.00,
+        inclusions: `Includes: 1. Web design / Web system\n2. Job post / Job Offer\n3. Technical Support (Hardware Maintenance)\n4. Company E-mail Server Maintenance\n5. Location Rescue system\n6. E-commerce site with SSL Security\n7. PRA Deployment\n8. FRA/SRA SYSTEM (IF NEEDED)\n9. Company Email Maintenance\n10. Voucher System\nHosting and domain, with SSL security\n--- Nothing Follows ---`
+    },
+    pkg_simsoh: {
+        name: "Web and System (Online) & Maintenance Services",
+        price: 5000.00,
+        inclusions: `Web and System (Online) & Maintenance Services for the Month\n--- Nothing Follows ---`
+    }
+};
+
+function onPackagePresetChange(pkgKey) {
+    if (pkgKey === 'custom') {
+        document.getElementById('cServiceName').focus();
+        return;
+    }
+    const pkg = OFFICIAL_PACKAGES[pkgKey];
+    if (!pkg) return;
+
+    document.getElementById('cServiceName').value = pkg.name;
+    document.getElementById('cPrice').value = pkg.price.toFixed(2);
+    document.getElementById('cServiceDesc').value = pkg.inclusions;
+    calculateLiveFormula();
+}
+
+function calculateLiveFormula() {
+    const priceVal = parseFloat(document.getElementById('cPrice').value) || 0;
+    const term = document.querySelector('input[name="payment_term"]:checked')?.value || 'full';
+    
+    let months = 1;
+    let label = 'Full Payment';
+    if (term === '3_months') { months = 3; label = '3 Months Installment'; }
+    if (term === '6_months') { months = 6; label = '6 Months Installment'; }
+
+    const monthly = priceVal / months;
+    const formattedTotal = priceVal.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    const formattedMonthly = monthly.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+
+    const gcashPayAmount = document.getElementById('gcashPayAmount');
+
+    if (months > 1) {
+        document.getElementById('displayMonthly').textContent = 'PHP ' + formattedMonthly + ' / month';
+        document.getElementById('displayFormulaText').textContent = '₱' + formattedTotal + ' ÷ ' + months + ' Months = ₱' + formattedMonthly + ' / month';
+        if (gcashPayAmount) gcashPayAmount.textContent = 'PHP ' + formattedMonthly + ' (1st Month)';
+    } else {
+        document.getElementById('displayMonthly').textContent = 'PHP ' + formattedTotal + ' (Full)';
+        document.getElementById('displayFormulaText').textContent = 'One-time Full Payment: ₱' + formattedTotal;
+        if (gcashPayAmount) gcashPayAmount.textContent = 'PHP ' + formattedTotal + ' (Full)';
+    }
+}
+
+async function submitClientPortalForm(e) {
+    e.preventDefault();
+    const btn = document.getElementById('submitBtn');
+    const paymentMethod = document.getElementById('cPaymentMethod').value;
+    const receiptInput = document.getElementById('cPaymentReceipt');
+
+    // If GCash is selected and receipt isn't uploaded yet, give friendly confirmation
+    if (paymentMethod === 'gcash' && (!receiptInput.files || receiptInput.files.length === 0)) {
+        const proceedWithout = confirm(
+            "Notice: You have not uploaded your GCash payment screenshot yet.\n\n" +
+            "Would you like to proceed and submit anyway? You can also click 'Cancel' to pay via GCash (09617190588) and attach the receipt screenshot."
+        );
+        if (!proceedWithout) {
+            document.getElementById('uploadDropzone').scrollIntoView({ behavior: 'smooth' });
+            return;
+        }
+    }
+
+    btn.disabled = true;
+    btn.innerHTML = 'Submitting Request & Uploading...';
+
+    const form = document.getElementById('clientPortalForm');
+    const formData = new FormData(form);
+    formData.append('action', 'submit_client_invoice');
+
+    // Attach optimized compressed receipt if available
+    if (compressedReceiptBlob) {
+        formData.set('payment_receipt', compressedReceiptBlob, 'gcash_receipt.jpg');
+    }
+
+    try {
+        const res = await fetch('api.php', {
+            method: 'POST',
+            body: formData
+        });
+
+        const text = await res.text();
+        let data;
+        try {
+            data = JSON.parse(text);
+        } catch (jsonErr) {
+            console.error('Non-JSON server response:', text);
+            throw new Error('Server response: ' + (text ? text.replace(/<[^>]+>/g, ' ').substring(0, 160) : 'Empty response'));
+        }
+
+        if (data.success) {
+            const invoice = data.data;
+            document.getElementById('resInvoiceNum').textContent = '#' + invoice.invoice_number;
+            document.getElementById('resTotal').textContent = 'PHP ' + parseFloat(invoice.grand_total).toLocaleString('en-US', { minimumFractionDigits: 2 });
+            
+            if (invoice.installment_months > 1) {
+                document.getElementById('resMonthlyRow').style.display = 'flex';
+                document.getElementById('resMonthly').textContent = 'PHP ' + parseFloat(invoice.monthly_payment).toLocaleString('en-US', { minimumFractionDigits: 2 }) + ' / month (' + invoice.installment_months + ' mos)';
+            } else {
+                document.getElementById('resMonthlyRow').style.display = 'none';
+            }
+
+            const receiptStatus = document.getElementById('resReceiptStatus');
+            const receiptRow = document.getElementById('resReceiptRow');
+            if (invoice.payment_receipt) {
+                receiptRow.style.display = 'flex';
+                receiptStatus.textContent = '✅ Uploaded & Sent to Admin';
+                receiptStatus.style.color = '#16a34a';
+            } else {
+                receiptRow.style.display = 'flex';
+                receiptStatus.textContent = 'Pending Upload / Cash Turnover';
+                receiptStatus.style.color = '#d97706';
+            }
+
+            document.getElementById('viewPrintBtn').href = 'print.html?id=' + invoice.invoice_id;
+            document.getElementById('successModal').style.display = 'flex';
+        } else {
+            alert('Submission Notice: ' + (data.message || 'Unable to submit request.'));
+        }
+    } catch (err) {
+        console.error('Submit error:', err);
+        alert('Notice: ' + (err.message || 'Communication error. Please check your network and try again.'));
+    } finally {
+        btn.disabled = false;
+        btn.innerHTML = `<svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg><span>Submit Invoice Request</span>`;
+    }
+}
+
+function closeModalAndReset() {
+    document.getElementById('successModal').style.display = 'none';
+    document.getElementById('clientPortalForm').reset();
+    removeReceipt();
+    calculateLiveFormula();
+}
+
+// Initial calculation on page load
+calculateLiveFormula();
+</script>
+
+</body>
+</html>

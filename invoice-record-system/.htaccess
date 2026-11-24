@@ -1,0 +1,41 @@
+# ========================================================
+# YARAMAY Computer Maintenance Services
+# Advanced Web Server Security Rules (.htaccess)
+# ========================================================
+
+# 0. Prioritize PHP app on Apache/XAMPP/PHP servers (GitHub Pages uses index.html)
+DirectoryIndex index.php index.html
+
+# 1. Disable Directory Indexing / Browsing
+Options -Indexes
+
+# 2. Block direct HTTP access to sensitive database and configuration files
+<FilesMatch "(^#.*#|\.(bak|config|sql|db|sqlite|sqlite3|log|ini|env|sh|inc|git.*|md))$">
+    <IfModule authz_core_module>
+        Require all denied
+    </IfModule>
+    <IfModule !authz_core_module>
+        Order deny,allow
+        Deny from all
+    </IfModule>
+</FilesMatch>
+
+# 3. Protect dot files (.git, .env, .htaccess)
+<FilesMatch "^\.">
+    <IfModule authz_core_module>
+        Require all denied
+    </IfModule>
+    <IfModule !authz_core_module>
+        Order deny,allow
+        Deny from all
+    </IfModule>
+</FilesMatch>
+
+# 4. Enforce Security Headers
+<IfModule mod_headers.c>
+    Header always set X-Content-Type-Options "nosniff"
+    Header always set X-Frame-Options "SAMEORIGIN"
+    Header always set X-XSS-Protection "1; mode=block"
+    Header always set Referrer-Policy "strict-origin-when-cross-origin"
+    Header unset X-Powered-By
+</IfModule>
