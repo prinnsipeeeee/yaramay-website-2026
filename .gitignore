@@ -12,6 +12,13 @@ dist
 dist-ssr
 *.local
 
+# invoice-record-system runtime state (schema stays tracked via database.sql)
+invoice-record-system/data/sessions/*
+!invoice-record-system/data/sessions/.gitkeep
+invoice-record-system/scratch/
+invoice-record-system/config.local.php
+invoice-record-system/.env
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
